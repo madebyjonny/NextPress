@@ -1,8 +1,8 @@
 // storage-adapter-import-placeholder
-import { postgresAdapter } from "@payloadcms/db-postgres";
+import { sqliteAdapter } from "@payloadcms/db-sqlite";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import path from "path";
-import { buildConfig } from "payload/config";
+import { buildConfig } from "payload";
 import { fileURLToPath } from "url";
 
 import { Users } from "./collections/Users";
@@ -15,23 +15,26 @@ const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
 
 export default buildConfig({
-  plugins: [
-    s3Storage({
-      collections: {
-        ["media"]: true,
-      },
-      bucket: process.env.S3_BUCKET as string,
-      config: {
-        forcePathStyle: true,
-        endpoint: process.env.S3_ENDPOINT as string,
-        credentials: {
-          accessKeyId: process.env.S3_ACCESS_ID as string,
-          secretAccessKey: process.env.S3_SECRET_ID as string,
-        },
-        region: process.env.S3_REGION as string,
-      },
-    }),
-  ],
+  plugins: [],
+  // process.env.NODE_ENV === "production"
+  //   ? [
+  //       s3Storage({
+  //         collections: {
+  //           ["media"]: true,
+  //         },
+  //         bucket: process.env.S3_BUCKET as string,
+  //         config: {
+  //           forcePathStyle: true,
+  //           endpoint: process.env.S3_ENDPOINT as string,
+  //           credentials: {
+  //             accessKeyId: process.env.S3_ACCESS_ID as string,
+  //             secretAccessKey: process.env.S3_SECRET_ID as string,
+  //           },
+  //           region: process.env.S3_REGION as string,
+  //         },
+  //       }),
+  //     ]
+  //   : [],
   admin: {
     user: Users.slug,
   },
@@ -41,9 +44,10 @@ export default buildConfig({
   typescript: {
     outputFile: path.resolve(dirname, "payload-types.ts"),
   },
-  db: postgresAdapter({
-    pool: {
-      connectionString: process.env.DATABASE_URI || "",
+  db: sqliteAdapter({
+    client: {
+      url: process.env.DATABASE_URI as string,
+      authToken: process.env.AUTH_TOKEN as string,
     },
   }),
 });

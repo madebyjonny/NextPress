@@ -9,16 +9,20 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@payloadcms/db-postgres": "^3.0.0-beta.53",
-    "@payloadcms/next": "^3.0.0-beta.53",
-    "@payloadcms/plugin-cloud": "^3.0.0-beta.53",
-    "@payloadcms/richtext-lexical": "^3.0.0-beta.53",
-    "@payloadcms/storage-s3": "^3.0.0-beta.53",
-    "graphql": "^16.8.1",
-    "next": "14.2.4",
-    "payload": "^3.0.0-beta.53",
-    "react": "^18",
-    "react-dom": "^18"
+    "@payloadcms/db-sqlite": "3.0.0-beta.76",
+    "@payloadcms/next": "3.0.0-beta.76",
+    "@payloadcms/plugin-cloud": "3.0.0-beta.76",
+    "@payloadcms/plugin-form-builder": "3.0.0-beta.76",
+    "@payloadcms/plugin-seo": "3.0.0-beta.76",
+    "@payloadcms/richtext-lexical": "3.0.0-beta.76",
+    "@payloadcms/storage-s3": "3.0.0-beta.76",
+    "cross-env": "^7.0.3",
+    "graphql": "^16.9.0",
+    "next": "15.0.0-canary.53",
+    "payload": "3.0.0-beta.76",
+    "react": "^19.0.0-rc-6230622a1a-20240610",
+    "react-dom": "^19.0.0-rc-6230622a1a-20240610",
+    "sharp": "0.32.6"
   },
   "devDependencies": {
     "@types/node": "^20",
